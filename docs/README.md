@@ -44,7 +44,11 @@ Schema documentation for the definition files that drive world generation. Descr
 
 ### [MCP_SERVER.md](MCP_SERVER.md)
 
-Model Context Protocol server implementation for AI integration.
+Model Context Protocol server implementation for AI integration. One agent, playing the user's club. The local model that speaks for other clubs is a different seam: [DIRECTOR.md](DIRECTOR.md).
+
+### [DIRECTOR.md](DIRECTOR.md)
+
+The morning director. Rust lists bids the transfer rules would already accept; a local model (LM Studio, Gemma by default) picks or passes and writes one sentence in the game's language, signed by a manager the save already names. Covers the call timing, the orbit as it works today and the league-rival orbit it does not, the journal, the Monday paper, the post-match quote, the contract letter, and the Gemma reply quirks that will bite the next change.
 
 ---
 

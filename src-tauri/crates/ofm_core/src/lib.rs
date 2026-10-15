@@ -24,6 +24,8 @@ pub mod contract_wage_policy;
 pub mod contracts;
 pub mod currency;
 pub mod delegated_renewals;
+pub mod director;
+pub mod director_voice;
 pub mod edition_archive;
 pub mod end_of_season;
 pub mod finances;

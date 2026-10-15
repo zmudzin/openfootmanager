@@ -85,6 +85,8 @@ fn write_game_to_connection(
         serde_json::to_string(&game.world_history).map_err(|_| game_persistence_write_error())?;
     let emitted_events_json =
         serde_json::to_string(&game.emitted_events).map_err(|_| game_persistence_write_error())?;
+    let director_journal_json = serde_json::to_string(&game.director_journal)
+        .map_err(|_| game_persistence_write_error())?;
     let extra_translations_json = serde_json::to_string(&game.extra_translations)
         .map_err(|_| game_persistence_write_error())?;
     let package_lockfile_json = serde_json::to_string(&game.package_lockfile)
@@ -114,6 +116,7 @@ fn write_game_to_connection(
             vacant_team_days_json,
             world_history_json,
             emitted_events_json,
+            director_journal_json,
             // Same bits, read back the same way in `read_game`.
             seed: game.seed as i64,
             legacy_world_cup_draw: game.legacy_world_cup_draw,
@@ -349,6 +352,8 @@ impl GamePersistenceReader {
         let mut game = Game {
             seed: meta.seed as u64,
             legacy_world_cup_draw: meta.legacy_world_cup_draw,
+            director_journal: serde_json::from_str(&meta.director_journal_json).unwrap_or_default(),
+            director_voice: None,
             clock,
             manager_id: meta.manager_id.clone(),
             managers,
@@ -523,6 +528,7 @@ mod tests {
             extra_translations_json: "{}".to_string(),
             package_lockfile_json: "[]".to_string(),
             emitted_events_json: "[]".to_string(),
+            director_journal_json: "[]".to_string(),
             seed: 0,
             legacy_world_cup_draw: false,
         }
@@ -770,6 +776,27 @@ mod tests {
         let loaded = GamePersistenceReader::read_game(&db).unwrap();
         assert_eq!(loaded.emitted_events, game.emitted_events);
         assert!(loaded.messages.is_empty());
+    }
+
+    /// Given a non-default director decision, when the career is saved and read back, then the decision is still there.
+    #[test]
+    fn write_and_read_game_preserves_the_director_journal() {
+        let db = GameDatabase::open_in_memory().unwrap();
+        let mut game = sample_game_with_clock(2032, 18);
+        game.director_journal
+            .push(ofm_core::game::DirectorJournalEntry {
+                date: "2032-07-02".to_string(),
+                club_id: "madrid".to_string(),
+                club_name: "Madrid CF".to_string(),
+                player_id: "costa".to_string(),
+                player_name: "Lorenzo Costa".to_string(),
+                action: "bid".to_string(),
+                reason: "squad_need".to_string(),
+            });
+        GamePersistenceWriter::write_game(&db, &game, "save-1", "Career").unwrap();
+
+        let loaded = GamePersistenceReader::read_game(&db).unwrap();
+        assert_eq!(loaded.director_journal, game.director_journal);
     }
 
     #[test]

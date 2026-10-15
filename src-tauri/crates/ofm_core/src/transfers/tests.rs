@@ -258,3 +258,312 @@ pub(super) fn assert_acceptance_notice<'a>(
     assert!(game.emitted_events.contains(&message.id));
     message
 }
+
+fn transfer_intent_bid(club_id: &str, player_id: &str, fee: u64) -> super::TransferIntent {
+    super::TransferIntent::Bid {
+        club_id: club_id.to_string(),
+        player_id: player_id.to_string(),
+        fee,
+    }
+}
+
+fn market_facts(game: &Game) -> (Vec<(String, String, u64)>, usize, i64, i64) {
+    let offers = game
+        .players
+        .iter()
+        .flat_map(|player| {
+            player
+                .transfer_offers
+                .iter()
+                .map(|offer| (player.id.clone(), offer.from_team_id.clone(), offer.fee))
+        })
+        .collect();
+    let buyer = game
+        .teams
+        .iter()
+        .find(|team| team.id == "team2")
+        .expect("buyer");
+    (
+        offers,
+        game.messages.len(),
+        buyer.transfer_budget,
+        buyer.finance,
+    )
+}
+
+fn register_seniors(game: &mut Game, team_id: &str, position: Position, count: usize) {
+    for index in 0..count {
+        let mut player = Player::new(
+            format!("pad-{team_id}-{position:?}-{index}"),
+            "Pad".into(),
+            "Player".into(),
+            "1998-01-01".into(),
+            "England".into(),
+            position.clone(),
+            sample_attributes(),
+        );
+        player.team_id = Some(team_id.to_string());
+        game.players.push(player);
+    }
+}
+
+#[test]
+fn transfer_intent_bid_keeps_the_proposed_fee_and_opens_the_inbox() {
+    let mut game = make_game();
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Accepted { fee: 250_000 }
+    );
+    let player = game
+        .players
+        .iter()
+        .find(|player| player.id == "player-award")
+        .expect("player");
+    assert_eq!(player.transfer_offers.len(), 1);
+    let offer = &player.transfer_offers[0];
+    assert_eq!(offer.from_team_id, "team2");
+    assert_eq!(offer.fee, 250_000);
+    assert_eq!(offer.status, TransferOfferStatus::Pending);
+    assert_eq!(offer.date, "2026-01-12");
+    assert_eq!(game.messages.len(), 1);
+    let message = &game.messages[0];
+    assert_eq!(message.id, "transfer_interest_player-award");
+    assert_eq!(message.context.player_id.as_deref(), Some("player-award"));
+    let shown_fee =
+        crate::currency::format_compact_money(250_000, crate::currency::DEFAULT_CURRENCY_CODE)
+            .expect("fee formats");
+    assert_eq!(
+        message.i18n_params.get("fee").map(String::as_str),
+        Some(shown_fee.as_str())
+    );
+    assert_eq!(
+        message.i18n_params.get("team").map(String::as_str),
+        Some("Beta FC")
+    );
+    let after = market_facts(&game);
+    assert_eq!(
+        after.2, before.2,
+        "a bid does not spend the transfer budget"
+    );
+    assert_eq!(after.3, before.3, "a bid does not spend the club's cash");
+}
+
+#[test]
+fn transfer_intent_closed_window_writes_nothing() {
+    let mut game = make_game();
+    game.season_context.transfer_window.status = TransferWindowStatus::Closed;
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::WindowClosed
+        }
+    );
+    assert_eq!(market_facts(&game), before);
+}
+
+#[test]
+fn transfer_intent_unaffordable_fee_writes_nothing() {
+    let mut game = make_game();
+    game.teams
+        .iter_mut()
+        .find(|team| team.id == "team2")
+        .expect("buyer")
+        .transfer_budget = 1_000;
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::TransferBudget
+        }
+    );
+    assert_eq!(market_facts(&game), before);
+}
+
+#[test]
+fn transfer_intent_pass_writes_nothing() {
+    let mut game = make_game();
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        super::TransferIntent::Pass {
+            club_id: "team2".into(),
+            player_id: "player-award".into(),
+        },
+    );
+
+    assert_eq!(outcome, super::TransferIntentOutcome::Passed);
+    assert_eq!(market_facts(&game), before);
+}
+
+#[test]
+fn transfer_intent_second_bid_does_not_change_the_accepted_fee() {
+    let mut game = make_game();
+    super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 900_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::AlreadyInTalks
+        }
+    );
+    let offer = &game.players[0].transfer_offers[0];
+    assert_eq!(offer.fee, 250_000);
+    assert_eq!(game.players[0].transfer_offers.len(), 1);
+    assert_eq!(
+        game.messages[0].i18n_params.get("fee").map(String::as_str),
+        crate::currency::format_compact_money(250_000, crate::currency::DEFAULT_CURRENCY_CODE)
+            .as_deref()
+    );
+}
+
+#[test]
+fn transfer_intent_club_too_small_for_the_player_writes_nothing() {
+    let mut game = make_game();
+    game.teams
+        .iter_mut()
+        .find(|team| team.id == "team2")
+        .expect("buyer")
+        .reputation = 400;
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::Reputation
+        }
+    );
+    assert_eq!(market_facts(&game), before);
+}
+
+#[test]
+fn transfer_intent_stacked_squad_is_refused_and_writes_nothing() {
+    let mut game = make_game();
+    register_seniors(&mut game, "team2", Position::Forward, 8);
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::SquadFull
+        }
+    );
+    assert_eq!(market_facts(&game), before);
+}
+
+#[test]
+fn transfer_intent_wage_the_board_would_refuse_writes_nothing() {
+    let mut game = make_game();
+    register_seniors(&mut game, "team2", Position::Goalkeeper, 2);
+    register_seniors(&mut game, "team2", Position::Defender, 5);
+    register_seniors(&mut game, "team2", Position::Midfielder, 5);
+    register_seniors(&mut game, "team2", Position::Forward, 3);
+    game.teams
+        .iter_mut()
+        .find(|team| team.id == "team2")
+        .expect("buyer")
+        .wage_budget = 0;
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "player-award", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::Wage
+        }
+    );
+    assert_eq!(market_facts(&game), before);
+}
+
+#[test]
+fn transfer_intent_for_another_clubs_player_does_not_move_him() {
+    let mut game = make_game();
+    let mut theirs = Player::new(
+        "their-player".into(),
+        "Theirs".into(),
+        "Their Player".into(),
+        "1999-01-01".into(),
+        "England".into(),
+        Position::Forward,
+        sample_attributes(),
+    );
+    theirs.team_id = Some("team2".into());
+    game.players.push(theirs);
+    let before = market_facts(&game);
+
+    let outcome = super::apply_transfer_intent(
+        &mut game,
+        transfer_intent_bid("team2", "their-player", 250_000),
+    );
+
+    assert_eq!(
+        outcome,
+        super::TransferIntentOutcome::Rejected {
+            reason: super::TransferIntentRejection::NotYourPlayer
+        }
+    );
+    assert_eq!(market_facts(&game), before);
+    assert_eq!(game.players[1].team_id.as_deref(), Some("team2"));
+}
+
+#[test]
+fn transfer_intent_json_is_a_bid_or_a_pass() {
+    let bid: super::TransferIntent = serde_json::from_str(
+        r#"{"kind":"bid","club_id":"team2","player_id":"player-award","fee":250000}"#,
+    )
+    .expect("bid json");
+    assert_eq!(bid, transfer_intent_bid("team2", "player-award", 250_000));
+
+    let pass: super::TransferIntent =
+        serde_json::from_str(r#"{"kind":"pass","club_id":"team2","player_id":"player-award"}"#)
+            .expect("pass json");
+    assert_eq!(
+        pass,
+        super::TransferIntent::Pass {
+            club_id: "team2".into(),
+            player_id: "player-award".into(),
+        }
+    );
+}

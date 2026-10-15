@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Président",
+      "manager": "Entraîneur",
       "competitionSecretary": "Secrétaire de Compétition",
       "assistantManager": "Entraîneur Adjoint",
       "pressOfficer": "Attaché de Presse",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} est venu te voir au sujet de sa situation contractuelle. Avec seulement {{days}} jours restants sur son contrat, il veut savoir à quoi s'en tenir.\n\n\"Coach, mon contrat arrive à son terme. J'ai besoin de savoir si je fais partie de tes plans ou si je dois chercher ailleurs.\"",
         "body1": "Ton adjoint signale que le contrat de {{player}} expire dans environ {{months}} mois. Le joueur s'interroge déjà dans le vestiaire sur son avenir.\n\nMieux vaut sans doute en parler avant qu'il ne se trouble ou que d'autres clubs ne commencent à tourner autour."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nLe contrat de {{player}} a encore {{months}} mois."
+      },
       "takeoverContractReview": {
         "subject": "Entraîneur Adjoint - Revue des Contrats",
         "bodyNoneUrgent": "Votre entraîneur adjoint a passé en revue les contrats de l'effectif après votre arrivée. {{totalExpiring}} joueur(s) arrivent en fin de contrat cette saison, mais aucun ne demande une décision immédiate aujourd'hui.\n\nCommencez à définir ceux que vous souhaitez conserver afin de garder la situation sous contrôle.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Intérêt de transfert pour {{player}}",
         "body": "Clubs avec des offres actives pour {{player}} : {{n}}. Dernière demande : {{team}} ({{fee}}). Consultez les offres dans l’onglet Transferts pour répondre.",
+        "directorManager": "{{speaker}}, entraîneur de {{team}}\n\n{{quote}}\n\n{{team}} propose {{fee}} pour {{player}}.",
+        "directorAssistant": "{{speaker}}, entraîneur adjoint de {{team}}\n\n{{quote}}\n\n{{team}} propose {{fee}} pour {{player}}.",
         "actionReview": "Voir les offres"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} porte sa série d'invincibilité à {{runLength}}",
           "body": "{{team}} reste sur {{runLength}} match(es) sans défaite et prend un vrai élan."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} étudie un mouvement pour {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} après {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, entraîneur de {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, entraîneur adjoint de {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} suscite l'intérêt de plusieurs clubs",

@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Chairman",
+      "manager": "Manager",
       "competitionSecretary": "Competition Secretary",
       "assistantManager": "Assistant Manager",
       "pressOfficer": "Press Officer",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} has approached you regarding their contract situation. With only {{days}} days remaining on their deal, they want to know where they stand.\n\n\"Boss, my contract is running down. I need to know if I'm part of your plans going forward or if I should start looking elsewhere.\"",
         "body1": "Your assistant flags that {{player}}'s contract expires in roughly {{months}} month(s). The player has been asking around the dressing room about their future.\n\nIt might be wise to have a conversation before they become unsettled — or before other clubs start circling."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\n{{player}}'s contract has {{months}} months left."
+      },
       "takeoverContractReview": {
         "subject": "Assistant Manager - Contract Review",
         "bodyNoneUrgent": "Your assistant has reviewed the squad contracts after your arrival. {{totalExpiring}} player(s) are due to come up for renewal this season, but none require an immediate decision today.\n\nStart mapping out who you want to keep so the situation stays under control.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Transfer interest in {{player}}",
         "body": "Clubs with active bids for {{player}}: {{n}}. Latest enquiry: {{team}} ({{fee}}). Review the offers in the Transfers tab to respond.",
+        "directorManager": "{{speaker}}, manager of {{team}}\n\n{{quote}}\n\n{{team}} bid {{fee}} for {{player}}.",
+        "directorAssistant": "{{speaker}}, assistant manager of {{team}}\n\n{{quote}}\n\n{{team}} bid {{fee}} for {{player}}.",
         "actionReview": "Review Offers"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} Extend Unbeaten Run to {{runLength}}",
           "body": "{{team}} have gone {{runLength}} match(es) without defeat and are building real momentum."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} weigh a move for {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} after {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, manager of {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, assistant manager of {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} Attracting Interest from Several Clubs",

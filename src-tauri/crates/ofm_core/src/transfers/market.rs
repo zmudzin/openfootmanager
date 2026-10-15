@@ -334,6 +334,15 @@ pub fn evaluate_transfer_market(game: &mut Game) {
                 return false;
             }
             if target.is_user_owned {
+                // This club already chose a bid or a pass this morning. The
+                // heuristic does not open a second approach on top of that.
+                if game
+                    .director_journal
+                    .iter()
+                    .any(|entry| entry.date == today && entry.club_id == buyer_id)
+                {
+                    return false;
+                }
                 let budget = IncomingOfferBudget {
                     new_today: &new_offers_per_player,
                     approach_clubs: &approach_clubs,

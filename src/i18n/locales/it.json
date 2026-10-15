@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Presidente",
+      "manager": "Allenatore",
       "competitionSecretary": "Segretario della competizione",
       "assistantManager": "Vice allenatore",
       "pressOfficer": "Addetto stampa",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} ti ha avvicinato per parlare della sua situazione contrattuale. Con solo {{days}} giorni rimanenti, vuole sapere qual è la sua posizione.\n\n\"Mister, il mio contratto sta scadendo. Ho bisogno di sapere se faccio parte dei tuoi piani futuri o se devo iniziare a guardarmi intorno.\"",
         "body1": "Il tuo assistente segnala che il contratto di {{player}} scade tra circa {{months}} mese/i. Il giocatore sta chiedendo in giro nello spogliatoio informazioni sul suo futuro.\n\nPotrebbe essere saggio parlarne prima che si agiti — o prima che altri club inizino a farsi avanti."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nIl contratto di {{player}} dura ancora {{months}} mesi."
+      },
       "takeoverContractReview": {
         "subject": "Vice allenatore - Revisione contratti",
         "bodyNoneUrgent": "Il tuo vice allenatore ha rivisto i contratti della rosa dopo il tuo arrivo. {{totalExpiring}} giocatore/i andranno in scadenza in questa stagione, ma nessuno richiede una decisione immediata oggi.\n\nInizia a definire chi vuoi trattenere così da mantenere la situazione sotto controllo.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Interesse di mercato per {{player}}",
         "body": "Club con offerte attive per {{player}}: {{n}}. Ultima richiesta: {{team}} ({{fee}}). Controlla le offerte nella scheda Trasferimenti per rispondere.",
+        "directorManager": "{{speaker}}, allenatore del {{team}}\n\n{{quote}}\n\n{{team}} offre {{fee}} per {{player}}.",
+        "directorAssistant": "{{speaker}}, allenatore in seconda del {{team}}\n\n{{quote}}\n\n{{team}} offre {{fee}} per {{player}}.",
         "actionReview": "Vedi offerte"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} allunga la striscia da imbattuto a {{runLength}}",
           "body": "{{team}} è imbattuto da {{runLength}} partita/e e sta prendendo un vero slancio."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} valuta una mossa per {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} dopo {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, allenatore del {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, allenatore in seconda del {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} attrae l'interesse di diversi club",

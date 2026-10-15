@@ -198,6 +198,7 @@ fn process_day_common(game: &mut Game, today: &str) {
 
     news::generate_weekly_digest_news(game, today);
     news::generate_pre_match_messages(game, today);
+    crate::director_voice::publish_director_voice(game);
 
     crate::firing::check_manager_firing(game);
     crate::ai_hiring::process_vacant_ai_clubs(game);

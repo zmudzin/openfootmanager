@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Vorsitzender",
+      "manager": "Trainer",
       "competitionSecretary": "Wettbewerbssekretär",
       "assistantManager": "Co-Trainer",
       "pressOfficer": "Pressesprecher",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} hat dich wegen seiner Vertragssituation angesprochen. Mit nur noch {{days}} Tagen Restlaufzeit möchte er wissen, woran er ist.\n\n\"Boss, mein Vertrag läuft aus. Ich muss wissen, ob ich weiter Teil deiner Pläne bin oder mich anderswo umsehen soll.\"",
         "body1": "Dein Assistent weist darauf hin, dass der Vertrag von {{player}} in etwa {{months}} Monat(en) ausläuft. Der Spieler hat in der Kabine bereits nach seiner Zukunft gefragt.\n\nEs wäre klug, bald das Gespräch zu suchen – bevor er unruhig wird oder andere Klubs aufmerksam werden."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nDer Vertrag von {{player}} läuft noch {{months}} Monate."
+      },
       "takeoverContractReview": {
         "subject": "Assistenztrainer - Vertragsprüfung",
         "bodyNoneUrgent": "Dein Assistenztrainer hat nach deiner Ankunft die Verträge des Kaders geprüft. {{totalExpiring}} Spieler laufen in dieser Saison aus, aber keiner erfordert heute eine sofortige Entscheidung.\n\nLege früh fest, wen du halten willst, damit die Situation unter Kontrolle bleibt.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Transferinteresse an {{player}}",
         "body": "Vereine mit aktiven Geboten für {{player}}: {{n}}. Letzte Anfrage: {{team}} ({{fee}}). Prüfe die Angebote im Transfers-Tab, um zu reagieren.",
+        "directorManager": "{{speaker}}, Trainer von {{team}}\n\n{{quote}}\n\n{{team}} bietet {{fee}} für {{player}}.",
+        "directorAssistant": "{{speaker}}, Co-Trainer von {{team}}\n\n{{quote}}\n\n{{team}} bietet {{fee}} für {{player}}.",
         "actionReview": "Angebote prüfen"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} baut die Ungeschlagen-Serie auf {{runLength}} aus",
           "body": "{{team}} ist seit {{runLength}} Spiel(en) ungeschlagen und gewinnt spürbar an Momentum."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} prüft einen Wechsel von {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} nach {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, Trainer von {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, Co-Trainer von {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} zieht Interesse mehrerer Vereine auf sich",

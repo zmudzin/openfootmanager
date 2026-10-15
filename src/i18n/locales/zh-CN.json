@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "主席",
+      "manager": "主教练",
       "competitionSecretary": "赛事秘书",
       "assistantManager": "助理教练",
       "pressOfficer": "新闻官",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}}找您谈了合同问题。他的合同只剩{{days}}天,他想知道自己的处境。\n\n“老板,我的合同快到期了。我需要知道自己是否在您未来的计划之中,或者是否应该开始另寻出路。”",
         "body1": "您的助理教练提示,{{player}}的合同大约还有{{months}}个月到期。该球员一直在更衣室里打听自己未来的去向。\n\n或许应在他变得心神不宁、或其他俱乐部开始围猎之前,先与他谈谈。"
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\n{{player}}的合同还剩{{months}}个月。"
+      },
       "takeoverContractReview": {
         "subject": "助理教练 - 合同审查",
         "bodyNoneUrgent": "你的助理教练在你上任后审查了球队合同。本赛季共有{{totalExpiring}}名球员将进入续约期,但今天还没有人需要你立刻做决定。\n\n先梳理清楚你想留下谁,这样局面才能保持可控。",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "对 {{player}} 的转会兴趣",
         "body": "对 {{player}} 提出有效报价的俱乐部：{{n}}。最新询问：{{team}}（{{fee}}）。请在转会标签页查看报价并回应。",
+        "directorManager": "{{speaker}}，{{team}}主教练\n\n{{quote}}\n\n{{team}}出价{{fee}}求购{{player}}。",
+        "directorAssistant": "{{speaker}}，{{team}}助理教练\n\n{{quote}}\n\n{{team}}出价{{fee}}求购{{player}}。",
         "actionReview": "查看报价"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}}不败纪录延续至{{runLength}}场",
           "body": "{{team}}已连续{{runLength}}场比赛保持不败,势头正劲。"
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}}考虑引进{{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}}谈{{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}，{{club}}主教练\n\n{{quote}}",
+        "assistant": "{{speaker}}，{{club}}助理教练\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}}引发多家俱乐部关注",

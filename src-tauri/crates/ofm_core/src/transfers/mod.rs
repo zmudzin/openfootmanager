@@ -24,6 +24,7 @@ use uuid::Uuid;
 
 mod bids;
 mod consts;
+mod director;
 mod execution;
 mod lifecycle;
 mod loans;
@@ -33,6 +34,7 @@ mod registration;
 
 pub use bids::*;
 use consts::*;
+pub use director::*;
 pub use execution::*;
 use lifecycle::*;
 pub use loans::*;

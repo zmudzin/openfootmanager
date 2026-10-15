@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Předseda",
+      "manager": "Trenér",
       "competitionSecretary": "Sekretář soutěže",
       "assistantManager": "Asistent manažera",
       "pressOfficer": "Tiskový mluvčí",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} za vámi přišel ohledně své smluvní situace. Do konce smlouvy mu zbývá pouhých {{days}} dní a chce vědět, na čem je.\n\n„Šéfe, smlouva mi běží ke konci. Potřebuji vědět, jestli jsem součástí vašich plánů do budoucna, nebo se mám začít poohlížet jinde.“",
         "body1": "Váš asistent upozorňuje, že smlouva hráče {{player}} vyprší přibližně za {{months}} měsíc(ů). Hráč se už v kabině vyptává ostatních na svou budoucnost.\n\nMělo by být moudré si s ním promluvit dřív, než znervózní — nebo než kolem něj začnou kroužit jiné kluby."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nSmlouva hráče {{player}} má před sebou ještě {{months}} měsíců."
+      },
       "takeoverContractReview": {
         "subject": "Asistent manažera - Kontrola smluv",
         "bodyNoneUrgent": "Váš asistent po vašem příchodu zkontroloval smlouvy v kádru. V této sezóně sice vyprší smlouva {{totalExpiring}} hráč(ům), ale žádný z nich nevyžaduje okamžité rozhodnutí ještě dnes.\n\nZačněte si mapovat, koho si chcete nechat, abyste měli situaci pod kontrolou.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Zájem o přestup hráče {{player}}",
         "body": "Kluby s aktivní nabídkou na hráče {{player}}: {{n}}. Nejnovější dotaz: {{team}} ({{fee}}). Pro odpověď zkontrolujte nabídky v záložce Přestupy.",
+        "directorManager": "{{speaker}}, trenér {{team}}\n\n{{quote}}\n\n{{team}} nabízí {{fee}} za {{player}}.",
+        "directorAssistant": "{{speaker}}, asistent trenéra {{team}}\n\n{{quote}}\n\n{{team}} nabízí {{fee}} za {{player}}.",
         "actionReview": "Zkontrolovat nabídky"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} natahuje sérii neporazitelnosti na {{runLength}} zápasů",
           "body": "Tým {{team}} už {{runLength}} zápas(ů) nepoznal hořkost porážky a buduje si skvělou herní pohodu."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} zvažuje příchod hráče {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} po zápase {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, trenér {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, asistent trenéra {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} přitahuje zájem několika klubů",

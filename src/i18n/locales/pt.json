@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Presidente",
+      "manager": "Treinador",
       "competitionSecretary": "Secretário da Competição",
       "assistantManager": "Treinador Adjunto",
       "pressOfficer": "Assessor de Imprensa",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} veio falar contigo sobre a sua situação contratual. Com apenas {{days}} dias restantes no contrato, quer saber com o que pode contar.\n\n\"Mister, o meu contrato está a chegar ao fim. Preciso de saber se faço parte dos teus planos para o futuro ou se devo começar a procurar noutro lado.\"",
         "body1": "O teu adjunto assinala que o contrato de {{player}} expira dentro de aproximadamente {{months}} mês(es). O jogador tem andado a perguntar no balneário sobre o seu futuro.\n\nTalvez seja sensato teres uma conversa antes que ele fique inquieto — ou antes que outros clubes comecem a rondar."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nO contrato de {{player}} tem {{months}} meses pela frente."
+      },
       "takeoverContractReview": {
         "subject": "Treinador Adjunto - Revisão de Contratos",
         "bodyNoneUrgent": "O teu adjunto reviu os contratos do plantel após a tua chegada. {{totalExpiring}} jogador(es) terminam contrato nesta época, mas nenhum exige uma decisão imediata hoje.\n\nComeça a definir quem queres manter para que a situação permaneça sob controlo.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Interesse de transferência em {{player}}",
         "body": "Clubes com propostas ativas por {{player}}: {{n}}. Última consulta: {{team}} ({{fee}}). Veja as propostas no separador Transferências para responder.",
+        "directorManager": "{{speaker}}, treinador do {{team}}\n\n{{quote}}\n\n{{team}} oferece {{fee}} por {{player}}.",
+        "directorAssistant": "{{speaker}}, adjunto do {{team}}\n\n{{quote}}\n\n{{team}} oferece {{fee}} por {{player}}.",
         "actionReview": "Ver propostas"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} prolonga série invicta para {{runLength}}",
           "body": "{{team}} soma {{runLength}} jogo(s) sem perder e está a ganhar verdadeiro embalo."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} estuda uma investida por {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} depois de {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, treinador do {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, adjunto do {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} desperta o interesse de vários clubes",

@@ -315,6 +315,11 @@ fn weekly_rumour_articles(
     suffix: &str,
     date: &str,
 ) -> Vec<domain::news::NewsArticle> {
+    // A real bid already has a paper voice. A second, invented rumour that
+    // Monday would contradict it.
+    if crate::director_voice::paper_pending(game) {
+        return vec![];
+    }
     let mut rng = game.rng_today(&format!("news/weekly-rumours/{suffix}"));
     let current_date = game.clock.current_date.date_naive();
     let existing_article_ids: HashSet<String> =

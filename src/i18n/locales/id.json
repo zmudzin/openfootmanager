@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Ketua",
+      "manager": "Pelatih",
       "competitionSecretary": "Sekretaris Kompetisi",
       "assistantManager": "Asisten Manajer",
       "pressOfficer": "Pejabat Pers",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} menemui kamu mengenai situasi kontrak mereka. Dengan hanya {{days}} hari tersisa pada kontrak mereka, mereka ingin tahu posisi mereka.\n\n\"Bos, kontrak saya hampir habis. Saya perlu tahu apakah saya masih bagian dari rencana kamu ke depan atau saya harus mulai mencari klub lain.\"",
         "body1": "Asisten kamu memberi tahu bahwa kontrak {{player}} berakhir dalam sekitar {{months}} bulan. Pemain tersebut mulai bertanya-tanya di ruang ganti tentang masa depannya.\n\nMungkin bijaksana untuk berbicara sebelum mereka merasa tidak tenang — atau sebelum klub lain mulai mendekat."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nKontrak {{player}} tersisa {{months}} bulan."
+      },
       "takeoverContractReview": {
         "subject": "Asisten Manajer - Tinjauan Kontrak",
         "bodyNoneUrgent": "Asisten kamu telah meninjau kontrak skuad setelah kedatangan kamu. {{totalExpiring}} pemain akan memperbarui kontrak musim ini, tetapi tidak ada yang membutuhkan keputusan segera hari ini.\n\nMulailah memetakan pemain yang ingin kamu pertahankan agar situasi tetap terkendali.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Minat Transfer pada {{player}}",
         "body": "Klub dengan tawaran aktif untuk {{player}}: {{n}}. Pertanyaan terbaru: {{team}} ({{fee}}). Tinjau tawaran di tab Transfer untuk merespons.",
+        "directorManager": "{{speaker}}, pelatih {{team}}\n\n{{quote}}\n\n{{team}} menawar {{fee}} untuk {{player}}.",
+        "directorAssistant": "{{speaker}}, asisten pelatih {{team}}\n\n{{quote}}\n\n{{team}} menawar {{fee}} untuk {{player}}.",
         "actionReview": "Tinjau Tawaran"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} Perpanjang Rekor Tak Terkalahkan menjadi {{runLength}}",
           "body": "{{team}} telah melalui {{runLength}} pertandingan tanpa kekalahan dan sedang membangun momentum nyata."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} mempertimbangkan langkah untuk {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} setelah {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, pelatih {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, asisten pelatih {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} Menarik Minat dari Beberapa Klub",

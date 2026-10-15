@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Presidente",
+      "manager": "Entrenador",
       "competitionSecretary": "Secretario de Competición",
       "assistantManager": "Segundo Entrenador",
       "pressOfficer": "Jefe de Prensa",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} se ha acercado para hablar de su situación contractual. Con solo {{days}} días restantes en su acuerdo, quiere saber cuál es su situación.\n\n\"Míster, mi contrato se está acabando. Necesito saber si sigo en tus planes o si debo empezar a mirar otras opciones.\"",
         "body1": "Tu asistente señala que el contrato de {{player}} expira en aproximadamente {{months}} mes(es). El jugador ya ha estado preguntando en el vestuario por su futuro.\n\nConviene hablar con él antes de que se inquiete o de que otros clubes empiecen a rondar."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\nAl contrato de {{player}} le quedan {{months}} meses."
+      },
       "takeoverContractReview": {
         "subject": "Segundo Entrenador - Revisión de Contratos",
         "bodyNoneUrgent": "Tu segundo entrenador ha revisado los contratos de la plantilla tras tu llegada. {{totalExpiring}} jugador(es) terminan contrato esta temporada, pero ninguno requiere una decisión inmediata hoy.\n\nEmpieza a definir a quién quieres mantener para que la situación siga bajo control.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "Interés de traspaso por {{player}}",
         "body": "Clubes con ofertas activas por {{player}}: {{n}}. Última consulta: {{team}} ({{fee}}). Revisa las ofertas en la pestaña Traspasos para responder.",
+        "directorManager": "{{speaker}}, entrenador de {{team}}\n\n{{quote}}\n\n{{team}} ofrece {{fee}} por {{player}}.",
+        "directorAssistant": "{{speaker}}, segundo entrenador de {{team}}\n\n{{quote}}\n\n{{team}} ofrece {{fee}} por {{player}}.",
         "actionReview": "Ver ofertas"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} amplía su racha invicta a {{runLength}}",
           "body": "{{team}} suma {{runLength}} partido(s) sin perder y está ganando un impulso real."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}} sopesa un movimiento por {{player}}"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}} tras {{home}} {{homeGoals}}-{{awayGoals}} {{away}}"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, entrenador de {{club}}\n\n{{quote}}",
+        "assistant": "{{speaker}}, segundo entrenador de {{club}}\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} despierta el interés de varios clubes",

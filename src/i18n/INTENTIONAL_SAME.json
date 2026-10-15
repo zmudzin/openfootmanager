@@ -25,7 +25,8 @@
     "worldEditor.playerId",
     "worldEditor.competitionId",
     "worldEditor.teamId",
-    "worldEditor.staffId"
+    "worldEditor.staffId",
+    "be.news.directorVoice.club"
   ],
   "de": [
     "nations.eng",

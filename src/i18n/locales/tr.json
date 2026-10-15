@@ -2909,6 +2909,7 @@
     },
     "role": {
       "chairman": "Kulüp Başkanı",
+      "manager": "Teknik Direktör",
       "competitionSecretary": "Turnuva Sekreteri",
       "assistantManager": "Yardımcı Antrenör",
       "pressOfficer": "Basın Sözcüsü",
@@ -3301,6 +3302,9 @@
         "body0": "{{player}} sözleşme durumuyla ilgili yanınıza geldi. Sözleşmesinin bitmesine yalnızca {{days}} gün kala nerede durduğunu bilmek istiyor.\n\n\"Hocam, sözleşmem bitiyor. İleriye dönük planlarınızda olup olmadığımı ya da başka yerlere bakmam gerekip gerekmediğini bilmem lazım.\"",
         "body1": "Yardımcınız, {{player}} oyuncusunun sözleşmesinin yaklaşık {{months}} ay içinde sona ereceğini bildiriyor. Oyuncu soyunma odasında geleceğini soruşturuyor.\n\nKafası karışmadan — ya da diğer kulüpler etrafında dolaşmaya başlamadan — önce bir konuşma yapmak akıllıca olabilir."
       },
+      "contractConcernVoice": {
+        "body": "{{quote}}\n\n{{player}} sözleşmesinin bitmesine {{months}} ay kaldı."
+      },
       "takeoverContractReview": {
         "subject": "Yardımcı Antrenör - Sözleşme İncelemesi",
         "bodyNoneUrgent": "Yardımcınız, göreve gelişinizin ardından kadro sözleşmelerini inceledi. Bu sezon {{totalExpiring}} oyuncunun sözleşmesi yenileme aşamasına gelecek, ancak hiçbiri bugün acil bir karar gerektirmiyor.\n\nDurumun kontrol altında kalması için kimleri tutmak istediğinizi şimdiden planlamaya başlayın.",
@@ -3451,6 +3455,8 @@
       "transferInterest": {
         "subject": "{{player}} için transfer ilgisi",
         "body": "{{player}} için aktif teklifi olan kulüpler: {{n}}. Son başvuru: {{team}} ({{fee}}). Yanıtlamak için teklifleri Transferler sekmesinde inceleyin.",
+        "directorManager": "{{speaker}}, {{team}} teknik direktörü\n\n{{quote}}\n\n{{team}}, {{player}} için {{fee}} teklif etti.",
+        "directorAssistant": "{{speaker}}, {{team}} yardımcı antrenörü\n\n{{quote}}\n\n{{team}}, {{player}} için {{fee}} teklif etti.",
         "actionReview": "Teklifleri İncele"
       },
       "loanAgreed": {
@@ -3613,6 +3619,17 @@
           "headline": "{{team}} Yenilmezlik Serisini {{runLength}} Maça Çıkardı",
           "body": "{{team}}, {{runLength}} maçtır yenilgi yüzü görmüyor ve ciddi bir ivme yakalıyor."
         }
+      },
+      "directorPaper": {
+        "headline": "{{club}}, {{player}} için bir hamle değerlendiriyor"
+      },
+      "directorMatch": {
+        "headline": "{{speaker}}, {{home}} {{homeGoals}}-{{awayGoals}} {{away}} sonrası"
+      },
+      "directorVoice": {
+        "manager": "{{speaker}}, {{club}} teknik direktörü\n\n{{quote}}",
+        "assistant": "{{speaker}}, {{club}} yardımcı antrenörü\n\n{{quote}}",
+        "club": "{{club}}\n\n{{quote}}"
       },
       "transferRumour": {
         "headline0": "{{player}} Birçok Kulübün İlgisini Çekiyor",

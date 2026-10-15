@@ -2,6 +2,7 @@ mod application;
 mod atomic_file;
 mod commands;
 mod crash;
+mod director;
 mod main_window;
 mod platform;
 mod report;

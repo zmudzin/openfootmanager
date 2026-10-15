@@ -246,6 +246,9 @@ pub fn skip_to_match_day_internal(state: &StateManager) -> Result<serde_json::Va
 ///   - `advanced`   — quiet day processed successfully; game state updated
 pub fn advance_one_day_internal(state: &StateManager) -> Result<serde_json::Value, String> {
     let _operation = crate::application::live_session::idle_operation(state)?;
+    // Same morning call as advance_time_with_mode. A multi-day skip does not
+    // use this function, so a month of calendar does not wait on the model.
+    crate::director::consult(state);
     // The whole check-process-respond sequence runs under the game lock
     // (update_game) so a concurrent GUI/MCP write is never clobbered by a
     // stale clone written back afterwards.

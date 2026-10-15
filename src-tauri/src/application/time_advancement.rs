@@ -97,6 +97,9 @@ pub fn advance_time_with_mode(
 ) -> Result<AdvanceTimeWithModeResponse, String> {
     let _operation = super::live_session::idle_operation(state)?;
     info!("[cmd] advance_time_with_mode: mode={}", mode);
+    // Before the day lock: a local model may bid, and a missing server must not
+    // hold the save. Skipping many days does not come through here.
+    crate::director::consult(state);
 
     // The whole day-start sequence runs under the game lock (update_game) so a
     // concurrent GUI/MCP mutation is never clobbered by writing back a stale

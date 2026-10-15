@@ -75,6 +75,57 @@ pub struct YouthScoutingAssignment {
     pub days_remaining: u32,
 }
 
+/// One morning's decision, kept so the next day remembers who already spoke.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct DirectorJournalEntry {
+    pub date: String,
+    pub club_id: String,
+    pub club_name: String,
+    #[serde(default)]
+    pub player_id: String,
+    #[serde(default)]
+    pub player_name: String,
+    /// `bid` or `pass`.
+    #[serde(default)]
+    pub action: String,
+    #[serde(default)]
+    pub reason: String,
+}
+
+/// The sentence written this morning, consumed when the day publishes it.
+/// Not stored in the save: the article or the letter is.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+pub struct DirectorVoice {
+    #[serde(default)]
+    pub date: String,
+    /// `paper`, `match`, or `letter`.
+    #[serde(default)]
+    pub kind: String,
+    #[serde(default)]
+    pub speaker_name: String,
+    /// `manager` or `assistant`.
+    #[serde(default)]
+    pub speaker_role: String,
+    #[serde(default)]
+    pub club_id: String,
+    #[serde(default)]
+    pub club_name: String,
+    #[serde(default)]
+    pub text: String,
+    #[serde(default)]
+    pub player_id: String,
+    #[serde(default)]
+    pub player_name: String,
+    #[serde(default)]
+    pub home_name: String,
+    #[serde(default)]
+    pub away_name: String,
+    #[serde(default)]
+    pub home_goals: u8,
+    #[serde(default)]
+    pub away_goals: u8,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Game {
     pub clock: GameClock,
@@ -167,6 +218,13 @@ pub struct Game {
     /// already made is not contradicted by the next. Never set on a new game.
     #[serde(default)]
     pub legacy_world_cup_draw: bool,
+    /// What the morning director already decided, newest last. The next slate
+    /// shows the tail, and the transfer market skips a club that chose today.
+    #[serde(default)]
+    pub director_journal: Vec<DirectorJournalEntry>,
+    /// Set in the morning and read back the same day. Skipped on save.
+    #[serde(skip)]
+    pub director_voice: Option<DirectorVoice>,
 
     /// Append-only cash journal. `Clone` is a pointer bump; `post` copy-on-writes.
     /// Skipped on IPC serde. Persistence is incremental SQL, not Game JSON.
@@ -229,6 +287,8 @@ impl Game {
             package_lockfile: vec![],
             seed: 0,
             legacy_world_cup_draw: false,
+            director_journal: Vec::new(),
+            director_voice: None,
             cash_journal: CashJournal::default(),
             cash_journal_dirty_ids: Vec::new(),
             squad_floor_top_ups: Vec::new(),

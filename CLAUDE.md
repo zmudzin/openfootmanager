@@ -259,6 +259,7 @@ Read-only reviewers. Point them at your diff before you open a PR.
 | [`docs/MATCH_SIMULATION.md`](docs/MATCH_SIMULATION.md) | The engine: zone model, action resolution, attributes, live match phases, AI |
 | [`docs/SAVE_SYSTEM_DESIGN.md`](docs/SAVE_SYSTEM_DESIGN.md) | Save format and persistence design |
 | [`docs/MCP_SERVER.md`](docs/MCP_SERVER.md) | The MCP server: 89 tools, competition mode, transport, adding a tool |
+| [`docs/DIRECTOR.md`](docs/DIRECTOR.md) | Morning director: legal bids, the local model, journal, paper and match quotes |
 | [`docs/modding/`](docs/modding/) | `.ofm` packages, the CLI, the Package Editor, the entity schema reference |
 | [`docs/DEFINITIONS.md`](docs/DEFINITIONS.md) | World-generator definition file formats |
 
